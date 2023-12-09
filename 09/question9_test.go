@@ -13,7 +13,7 @@ func TestPartOne(t *testing.T) {
 	ansFull := 1938800261
 	rFull := PartOne("data.txt")
 	if rFull != ansFull {
-		t.Errorf("Got %d; want %d", ansFull, ansFull)
+		t.Errorf("Got %d; want %d", rFull, ansFull)
 	}
 }
 
@@ -26,6 +26,6 @@ func TestPartTwo(t *testing.T) {
 	ansFull := 1112
 	rFull := PartTwo("data.txt")
 	if rFull != ansFull {
-		t.Errorf("Got %d; want %d", ansFull, ansFull)
+		t.Errorf("Got %d; want %d", rFull, ansFull)
 	}
 }

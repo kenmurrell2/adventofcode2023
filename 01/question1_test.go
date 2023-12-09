@@ -4,23 +4,28 @@ import (
 	"testing"
 )
 
-func TestPartOne(t *testing.T){
-	ans := 297
-	r := PartOne("test.txt")
-	if r != ans{
-		t.Errorf("Got %d; want %d", r, ans)
-	} 
-}
-
-func TestPartTwo(t *testing.T){
-	ans := 363
-	r := PartTwo("test.txt")
-	if r != ans{
-		t.Errorf("Got %d; want %d", r, ans)
+func TestPartOne(t *testing.T) {
+	ansTest := 297
+	rTest := PartOne("test.txt")
+	if rTest != ansTest {
+		t.Errorf("Got %d; want %d", rTest, ansTest)
+	}
+	ansFull := 52974
+	rFull := PartOne("data.txt")
+	if rFull != ansFull {
+		t.Errorf("Got %d; want %d", rFull, ansFull)
 	}
 }
 
-func TestRunAll(t *testing.T) {
-	t.Logf("ANSWER PartOne: %d\n", PartOne("data.txt")) //52974
-	t.Logf("ANSWER PartTwo: %d\n", PartTwo("data.txt")) //53340
+func TestPartTwo(t *testing.T) {
+	ansTest := 363
+	rTest := PartTwo("test.txt")
+	if rTest != ansTest {
+		t.Errorf("Got %d; want %d", rTest, ansTest)
+	}
+	ansFull := 53340
+	rFull := PartTwo("data.txt")
+	if rFull != ansFull {
+		t.Errorf("Got %d; want %d", rFull, ansFull)
+	}
 }

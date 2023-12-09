@@ -5,21 +5,47 @@ import (
 	"time"
 )
 
-func TestPartOne(t *testing.T){
-	ans := 6440
-	r := PartOne("test.txt")
-	if r != ans{
-		t.Errorf("Got %d; want %d", r, ans)
-	} 
-}
-
-func TestPartTwo(t *testing.T){
-	ans := 5905
-	r := PartTwo("test.txt")
-	if r != ans{
-		t.Errorf("Got %d; want %d", r, ans)
+func TestPartOne(t *testing.T) {
+	ansTest := 6440
+	rTest := PartOne("test.txt")
+	if rTest != ansTest {
+		t.Errorf("Got %d; want %d", rTest, ansTest)
+	}
+	ansFull := 248836197
+	rFull := PartOne("data.txt")
+	if rFull != ansFull {
+		t.Errorf("Got %d; want %d", rFull, ansFull)
 	}
 }
+
+func TestPartTwo(t *testing.T) {
+	ansTest := 5905
+	rTest := PartTwo("test.txt")
+	if rTest != ansTest {
+		t.Errorf("Got %d; want %d", rTest, ansTest)
+	}
+	ansFull := 251195607
+	rFull := PartTwo("data.txt")
+	if rFull != ansFull {
+		t.Errorf("Got %d; want %d", rFull, ansFull)
+	}
+}
+
+// func TestPartOne(t *testing.T) {
+// 	ans := 6440
+// 	r := PartOne("test.txt")
+// 	if r != ans {
+// 		t.Errorf("Got %d; want %d", r, ans)
+// 	}
+// }
+
+// func TestPartTwo(t *testing.T) {
+// 	ans := 5905
+// 	r := PartTwo("test.txt")
+// 	if r != ans {
+// 		t.Errorf("Got %d; want %d", r, ans)
+// 	}
+// }
 
 func TestRunAll(t *testing.T) {
 	start1 := time.Now()

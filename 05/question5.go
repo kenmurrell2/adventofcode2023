@@ -175,7 +175,6 @@ func PartTwo(path string) int {
 
 	wg.Wait()
 	time.Sleep(time.Second * 10)
-	// fmt.Printf("ANSWER: %d\n", least)
 	close(seedChan)
 	return least
 }
@@ -196,6 +195,8 @@ func RunTwo(wg *sync.WaitGroup, mu *sync.Mutex, num int, least *int, cons *[]Con
 }
 
 func main() {
-	least := PartTwo("data.txt")
-	fmt.Printf("ANSWER: %d\n", least)
+	r1 := PartOne("data.txt")
+	fmt.Printf("ANSWER ONE: %d\n", r1)
+	r2 := PartTwo("data.txt")
+	fmt.Printf("ANSWER TWO: %d\n", r2)
 }

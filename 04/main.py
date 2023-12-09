@@ -1,6 +1,6 @@
 
 
-def partOne(filename):
+def partOne(filename: str) -> str:
     results = dict()
     with open(filename) as f:
         for line in f:
@@ -22,7 +22,7 @@ def partOne(filename):
             results[cardnum] = p
     return sum(results.values())
 
-def partTwo(filename):
+def partTwo(filename: str) -> str:
     results = list()
     total = 0
     with open(filename) as f:
@@ -52,9 +52,14 @@ def partTwo(filename):
 
     return sum(multi)
 
+def test(ans, file, fn):
+    r = fn(file)
+    if r != ans:
+        raise ValueError("Want %d, got %d.", ans, r)
+    else:
+        return "SUCCESS"
 
-print("Part One Test: " + str(partOne("test.txt")))
-print("Part One Ans: " + str(partOne("data.txt")))
-
-print("Part Two Test: " + str(partTwo("test.txt")))
-print("Part Two Ans: " + str(partTwo("data.txt")))
+print("PartOne Test: " + test(13, "test.txt", partOne))
+print("PartOne Full: " + test(20407, "data.txt", partOne))
+print("PartTwo Test: " + test(30, "test.txt", partTwo))
+print("PartTwo Full: " + test(23806951, "data.txt", partTwo))

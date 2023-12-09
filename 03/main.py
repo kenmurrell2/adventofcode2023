@@ -47,5 +47,12 @@ def partOne(filename):
                 sum += int(buffer)
         return sum
 
-print("Part One Test: " + str(partOne("test.txt")))
-print("Part One Answer: " + str(partOne("data.txt")))
+def test(ans, file, fn):
+    r = fn(file)
+    if r != ans:
+        raise ValueError("Want %d, got %d.", ans, r)
+    else:
+        return "SUCCESS"
+
+print("PartOne Test: " + test(4361, "test.txt", partOne))
+print("PartOne Full: " + test(539637, "data.txt", partOne))

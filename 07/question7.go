@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"math"
 	"os"
@@ -12,8 +13,8 @@ import (
 
 type Hand struct {
 	cards string
-	bet int
-	S Score
+	bet   int
+	S     Score
 }
 
 type Score struct {
@@ -21,42 +22,42 @@ type Score struct {
 	b int
 }
 
-func CalculateScore1(cards string) Score{
+func CalculateScore1(cards string) Score {
 	handranks := make(map[string]int)
-	handranks["2"] = 0 
-	handranks["3"] = 1 
-	handranks["4"] = 2 
-	handranks["5"] = 3 
-	handranks["6"] = 4 
-	handranks["7"] = 5 
-	handranks["8"] = 6 
-	handranks["9"] = 7 
-	handranks["T"] = 8 
-	handranks["J"] = 9 
-	handranks["Q"] = 10 
+	handranks["2"] = 0
+	handranks["3"] = 1
+	handranks["4"] = 2
+	handranks["5"] = 3
+	handranks["6"] = 4
+	handranks["7"] = 5
+	handranks["8"] = 6
+	handranks["9"] = 7
+	handranks["T"] = 8
+	handranks["J"] = 9
+	handranks["Q"] = 10
 	handranks["K"] = 11
 	handranks["A"] = 12
 
 	p := make(map[string]int, 1)
 	r := 0
-	for i, s := range(strings.Split(cards, "")){
+	for i, s := range strings.Split(cards, "") {
 		r += handranks[s] * int(math.Pow(100, float64(5-1-i)))
 		p[s] += 1
 	}
 	d := 0
 	t := false
-	for _,v := range p {
-		if v == 5 || v ==4 {
-			return Score{v+1, r}
+	for _, v := range p {
+		if v == 5 || v == 4 {
+			return Score{v + 1, r}
 		}
 		if v == 3 {
-			t=true
-		} else if v ==2 {
-			d+=1
-		} 
+			t = true
+		} else if v == 2 {
+			d += 1
+		}
 	}
 	if t {
-		if d > 0{
+		if d > 0 {
 			return Score{4, r}
 		}
 		return Score{3, r}
@@ -64,19 +65,19 @@ func CalculateScore1(cards string) Score{
 	return Score{d, r}
 }
 
-func CalculateScore2(cards string) Score{
+func CalculateScore2(cards string) Score {
 	handranks := make(map[string]int)
-	handranks["2"] = 2 
-	handranks["3"] = 3 
-	handranks["4"] = 4 
-	handranks["5"] = 5 
-	handranks["6"] = 6 
-	handranks["7"] = 7 
-	handranks["8"] = 8 
-	handranks["9"] = 9 
-	handranks["T"] = 10 
+	handranks["2"] = 2
+	handranks["3"] = 3
+	handranks["4"] = 4
+	handranks["5"] = 5
+	handranks["6"] = 6
+	handranks["7"] = 7
+	handranks["8"] = 8
+	handranks["9"] = 9
+	handranks["T"] = 10
 	handranks["J"] = 1
-	handranks["Q"] = 11 
+	handranks["Q"] = 11
 	handranks["K"] = 12
 	handranks["A"] = 13
 
@@ -85,10 +86,10 @@ func CalculateScore2(cards string) Score{
 	maxkey := ""
 	maxval := 0
 
-	for i, s := range(strings.Split(cards, "")){
+	for i, s := range strings.Split(cards, "") {
 		r += handranks[s] * int(math.Pow(100, float64(5-1-i)))
 		p[s] += 1
-		if s != "J" && p[s] > maxval{
+		if s != "J" && p[s] > maxval {
 			maxkey = s
 			maxval = p[s]
 		}
@@ -99,18 +100,18 @@ func CalculateScore2(cards string) Score{
 	}
 	d := 0
 	t := false
-	for _,v := range p {
-		if v == 5 || v ==4 {
-			return Score{v+1, r}
+	for _, v := range p {
+		if v == 5 || v == 4 {
+			return Score{v + 1, r}
 		}
 		if v == 3 {
-			t=true
-		} else if v ==2 {
-			d+=1
-		} 
+			t = true
+		} else if v == 2 {
+			d += 1
+		}
 	}
 	if t {
-		if d > 0{
+		if d > 0 {
 			return Score{4, r}
 		}
 		return Score{3, r}
@@ -120,21 +121,21 @@ func CalculateScore2(cards string) Score{
 
 func ParseInput(path string, fn Calc) []Hand {
 	file, err := os.Open(path)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
 
-    scanner := bufio.NewScanner(file)
+	scanner := bufio.NewScanner(file)
 	var hands []Hand
-    for scanner.Scan() {
+	for scanner.Scan() {
 		line := strings.Split(scanner.Text(), " ")
 		integer, _ := strconv.Atoi(line[1])
 		score := fn(line[0])
 		hands = append(hands, Hand{
 			cards: line[0],
-			bet: integer,
-			S: score,
+			bet:   integer,
+			S:     score,
 		})
 	}
 	return hands
@@ -151,8 +152,8 @@ func PartOne(path string) int {
 		return hands[i].S.a < hands[j].S.a
 	})
 	total := 0
-	for i, h := range(hands) {
-		total += (i+1) * h.bet
+	for i, h := range hands {
+		total += (i + 1) * h.bet
 	}
 	return total
 }
@@ -166,8 +167,15 @@ func PartTwo(path string) int {
 		return hands[i].S.a < hands[j].S.a
 	})
 	total := 0
-	for i, h := range(hands) {
-		total += (i+1) * h.bet
+	for i, h := range hands {
+		total += (i + 1) * h.bet
 	}
 	return total
+}
+
+func main() {
+	r1 := PartOne("data.txt")
+	fmt.Printf("ANSWER ONE: %d\n", r1)
+	r2 := PartTwo("data.txt")
+	fmt.Printf("ANSWER TWO: %d\n", r2)
 }
